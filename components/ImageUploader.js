@@ -12,6 +12,7 @@ export default function ImageUploader() {
     const[progress, setProgress] = useState(0)
     const[theDownloadURL, setTheDownloadURL] = useState(null)
     const[fileName, setFileName] = useState('')
+    const[pathName,setPathName] = useState('')
 
     function makeid() {
         var result           = '';
@@ -32,6 +33,7 @@ export default function ImageUploader() {
         const fileIdent = `${identifier}.${extension}`
 
         setFileName(identifier)
+        setPathName(`uploads/${user.uid}/${fileIdent}`)
 
         // Make reference to storage bucket location
         const storageRef = ref(storage, `uploads/${user.uid}/${fileIdent}`);
@@ -71,7 +73,7 @@ export default function ImageUploader() {
         async function updateFirebase() {
             if(user){
                 const userDoc = doc(firestore, `users/${user.uid}/posts/${fileName}`)
-                await setDoc(userDoc, {imageId: fileName, downloadURL: theDownloadURL, user:user.uid, ready: true}, {merge: true})
+                await setDoc(userDoc, {path: pathName, imageId: fileName, downloadURL: theDownloadURL, user:user.uid, ready: true}, {merge: true})
             }
         }
         updateFirebase()

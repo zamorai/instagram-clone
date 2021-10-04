@@ -1,10 +1,11 @@
-import { collection, getDocs, deleteDoc, doc } from "@firebase/firestore"
+import { collection, getDocs, deleteDoc, doc, getDoc } from "@firebase/firestore"
 import { useContext, useEffect, useState } from "react"
 import ImageGallery from "../../components/ImageGallery"
 import { UserContext } from "../../lib/context"
-import { firestore } from "../../lib/firebase"
+import { firestore, storage } from "../../lib/firebase"
 import toast from 'react-hot-toast';
 import AuthCheck from "../../components/AuthCheck"
+import { deleteObject, ref } from "@firebase/storage"
 
 export default function Admin() {
     const user = useContext(UserContext);
@@ -26,10 +27,21 @@ export default function Admin() {
     }, [images])
 
     const deleteImage = async (id) => {
+
+        // Get path to delete from storage
+        const deleteRef = doc(firestore, `users/${user.uid}/posts/${id}`)
+        const deleteSnap = await getDoc(deleteRef)
+
         // Delete the file from firestore
         const confirmDelete = confirm("Do you want to delete this image?");
         if (confirmDelete) {
           await deleteDoc(doc(firestore, `users/${user.uid}/posts/${id}`))
+          const deleteRef = ref(storage, deleteSnap.data().path)
+          deleteObject(deleteRef).then(() => {
+              console.log("Delete Successfull")
+          }).catch((error) => {
+              console.log(error)
+          })
           toast.success('Image successfully deleted', {
             style: {
               padding: '16px',
@@ -38,11 +50,6 @@ export default function Admin() {
             icon: '🗑️'
           });
         }
-        
-        // Delete the file from storage
-        // TODO: create another field in firestore to upload with the path to the storage, 
-        // then query the path here and use it to delete the file in storage. 
-        //const deleteRef = ref(storage, `uploads/${user.uid}/${id}.*`)
       }
 
     return (

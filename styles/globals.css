@@ -108,8 +108,7 @@ a {
 
 .welcome-container {
   height: 100vh;
-  background-color: rgba(5, 85, 48, 0.87);
-  background-image: linear-gradient(#614385 , #516395);
+  background-color: rgba(235, 235, 235, 0.87);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -142,12 +141,9 @@ a {
   font-weight: 600;
 }
 
-p{
-  font-size: 3rem;
-}
-
 .password-card {
   background-color: white;
+  box-shadow: rgba(0, 0, 0, 0.178) 0.7rem 0.6rem 5rem;
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -156,27 +152,67 @@ p{
   width: 70rem;
   padding: 6rem 6rem;
   border-radius: 0.6rem;
+  color: rgb(80, 80, 80);
+  margin: 1rem;
+  position: relative; 
+}
+
+.password-card::after {
+  content: "";
+  position: absolute;
+  background-color: rgb(216, 216, 216);
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 100%;
+  z-index: 1;
+  transition: all 4s;
+}
+
+.password-card::before {
+  content: "";
+  position: absolute;
+  background-color: rgb(216, 216, 216);
+  top: 0;
+  right: 0;
+  width: 50%;
+  height: 100%;
+  z-index: 1;
+  transition: all 4s;
+}
+
+.password-card:hover::after {
+  width: 0;
+}
+
+.password-card:hover::before {
+  width: 0;
 }
 
 .password-form {
   display: flex;
   flex-direction: column;
   width: 100%;
-}
-
-.password-description-container {
-
+  margin-top: 1rem;
+  text-align: center;
 }
 
 .password-description {
+  font-size: 2.5rem;
+}
 
+.password-description-container {
+  z-index: 2;
 }
 
 .password-input {
   text-align: center;
   border: none;
-  padding: 1rem;
+  padding: 1.5rem;
   position: relative;
+  font-size: 2rem;
+  color: rgb(80, 80, 80);
+  z-index: 2;
 }
 
 .password-input:focus {
@@ -184,7 +220,23 @@ p{
 }
 
 .password-button {
+  padding: 1rem;
+  background-color: #4BB543;
+  color: white;
+  border: none;
+  transition: all 0.1s;
+  border-radius: 0.2rem;
+  font-size: 1.8rem;
+  z-index: 0;
+}
 
+.password-button:hover {
+  position: relative;
+  z-index: 4;
+}
+
+.password-button:hover{
+  background-color: #50d847;
 }
 
 /* ===== HEADER ===== */
@@ -232,8 +284,9 @@ p{
 } 
 
 .gallery-img {
-  min-width: 100%;
-  max-height: 50rem;
+  max-width: 100%;
+  max-height: 40rem;
+  min-height: min-content;
   object-fit: cover;
   object-position: center;
 }
@@ -270,7 +323,15 @@ p{
 /* ===== SINGLE IMAGE ===== */
 
 .single-img {
-  height: 100rem;
+  max-width: 100rem;
+  max-height: 60rem;
+}
+
+.single-container { 
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 4rem;
 }
 
 

@@ -27,7 +27,7 @@ export default function index() {
     
 
     return (
-        <div>
+        <div className="single-container">
             {image ? <img className="single-img" src={image.downloadURL} /> : ''}
         </div>
     )

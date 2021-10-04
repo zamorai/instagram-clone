@@ -124,9 +124,7 @@ const Password = (props) => {
     return (
         <div className="password-card">
             <div className='password-description-container'>
-                <p className='password-description'>In order to solve this puzzle, you will have to think
-                about all of our adventures together, and what names we like to call each other,
-                you will also have to think out of the box, as nothing is ever what it first seems. </p>
+                <p className='password-description'>La clave es uno de los muchos nombres que nos decimos, pero pensando un poco out of the box. Piensa en mi mejor amigo que me regalaste :D</p>
             </div>
             <form className="password-form" onSubmit={props.submitPassword}>
                 <input className="password-input" autoComplete='off' name='password' placeholder='password' value={passwordText} onChange={onChange} />
@@ -141,10 +139,10 @@ function PasswordHelper({ distance, text }) {
     if (distance == null || text === '') {
       return <p></p>;
     } else if (distance > 4) {
-      return <p className="text-success">Not even close!</p>;
+      return <p className='password-description'>Not even close to unlocking</p>;
     } else if (distance <= 4 && distance > 0) {
-      return <p className="text-danger">Almost! {distance} letters away!</p>;
+      return <p className='password-description'>Almost, {distance} letters away</p>;
     } else {
-        return <p>Correct!</p>
+        return <p className='password-description'>Correct!</p>
     }
   }
