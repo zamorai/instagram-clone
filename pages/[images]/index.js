@@ -4,7 +4,7 @@ import {query, collectionGroup, where, getDocs, doc, getDoc } from '@firebase/fi
 import { useRouter } from 'next/router';
 import { UserContext } from '../../lib/context';
 
-export default function index() {
+export default function SingleImage() {
     const user = useContext(UserContext)
     const[image, setImage] = useState(null)
     const router = useRouter();
