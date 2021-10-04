@@ -22,7 +22,7 @@ export async function getStaticProps(context) {
 
 }
 
-export default function welcome(props) {
+export default function Welcome(props) {
 
     const user = useContext(UserContext)
     const router = useRouter();
