@@ -22,7 +22,7 @@ export default function SingleImage() {
             }
         }
         getImage()
-    }, [])
+    }, [user, router.asPath])
 
     
 
